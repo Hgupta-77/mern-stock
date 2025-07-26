@@ -11,7 +11,7 @@ app.use(express.json());
 
 connectDB();
 
-app.use('/', require('./routes/stockRoutes'));
+app.use('/', require('./routes/StockRoutes'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
