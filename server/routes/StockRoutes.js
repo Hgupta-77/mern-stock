@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getStocks, buyStock, sellStock } = require('../controllers/stockController');
+const { getStocks, buyStock, sellStock } = require('../controllers/StockController');
 
 // All stock-related routes
 router.get('/stocks', getStocks);
