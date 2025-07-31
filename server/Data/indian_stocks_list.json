@@ -1,0 +1,82 @@
+[
+    {
+        "symbol": "RELIANCE.BSE",
+        "name": "Reliance Industries Ltd"
+    },
+    {
+        "symbol": "TCS.BSE",
+        "name": "Tata Consultancy Services Ltd"
+    },
+    {
+        "symbol": "INFY.BSE",
+        "name": "Infosys Ltd"
+    },
+    {
+        "symbol": "HDFCBANK.BSE",
+        "name": "HDFC Bank Ltd"
+    },
+    {
+        "symbol": "ITC.BSE",
+        "name": "ITC Ltd"
+    },
+    {
+        "symbol": "LT.BSE",
+        "name": "Larsen & Toubro Ltd"
+    },
+    {
+        "symbol": "SBIN.BSE",
+        "name": "State Bank of India"
+    },
+    {
+        "symbol": "ICICIBANK.BSE",
+        "name": "ICICI Bank Ltd"
+    },
+    {
+        "symbol": "AXISBANK.BSE",
+        "name": "Axis Bank Ltd"
+    },
+    {
+        "symbol": "WIPRO.BSE",
+        "name": "Wipro Ltd"
+    },
+    {
+        "symbol": "HINDUNILVR.BSE",
+        "name": "Hindustan Unilever Ltd"
+    },
+    {
+        "symbol": "BAJFINANCE.BSE",
+        "name": "Bajaj Finance Ltd"
+    },
+    {
+        "symbol": "MARUTI.BSE",
+        "name": "Maruti Suzuki India Ltd"
+    },
+    {
+        "symbol": "ULTRACEMCO.BSE",
+        "name": "UltraTech Cement Ltd"
+    },
+    {
+        "symbol": "ASIANPAINT.BSE",
+        "name": "Asian Paints Ltd"
+    },
+    {
+        "symbol": "SUNPHARMA.BSE",
+        "name": "Sun Pharmaceutical Industries Ltd"
+    },
+    {
+        "symbol": "POWERGRID.BSE",
+        "name": "Power Grid Corporation of India Ltd"
+    },
+    {
+        "symbol": "NTPC.BSE",
+        "name": "NTPC Ltd"
+    },
+    {
+        "symbol": "COALINDIA.BSE",
+        "name": "Coal India Ltd"
+    },
+    {
+        "symbol": "ONGC.BSE",
+        "name": "Oil and Natural Gas Corporation Ltd"
+    }
+]

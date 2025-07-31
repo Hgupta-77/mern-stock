@@ -1,22 +1,57 @@
-const Stock = require('../models/Stock');
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
+const Stock = require("../models/Stock");
 
 // GET /stocks
 exports.getStocks = async (req, res) => {
   try {
-    let stocks = await Stock.find();
+    // Load static symbol list
+    const filePath = path.join(__dirname, "../data/indian_stocks_list.json");
+    const jsonStocks = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
-    // If DB is empty, insert dummy data
-    if (stocks.length === 0) {
-      const dummyStocks = [
-        { name: "Tata Motors", price: 820, symbol: "TATA", quantity: 100 },
-        { name: "Infosys", price: 1510, symbol: "INFY", quantity: 200 },
-        { name: "Reliance", price: 2730, symbol: "RELI", quantity: 150 }
-      ];
-      await Stock.insertMany(dummyStocks);
-      stocks = await Stock.find(); // Re-fetch after insert
+    // Check DB for existing stocks
+    let dbStocks = await Stock.find();
+
+    // If DB empty, insert dummy quantity for all stocks
+    if (dbStocks.length === 0) {
+      const dummyWithQuantity = jsonStocks.map((stock) => ({
+        name: stock.name,
+        symbol: stock.symbol,
+        quantity: Math.floor(Math.random() * 100) + 10 // random quantity
+      }));
+      await Stock.insertMany(dummyWithQuantity);
+      dbStocks = await Stock.find();
     }
 
-    res.json(stocks);
+    // Fetch live prices using Twelve Data
+    const promises = jsonStocks.map((stock) =>
+      axios
+        .get(`https://api.twelvedata.com/price?symbol=${stock.symbol}&apikey=${process.env.TWELVE_API_KEY}`)
+        .then((res) => ({
+          name: stock.name,
+          symbol: stock.symbol,
+          price: res.data.price || "N/A"
+        }))
+        .catch(() => ({
+          name: stock.name,
+          symbol: stock.symbol,
+          price: "Error"
+        }))
+    );
+
+    const livePrices = await Promise.all(promises);
+
+    // Merge quantity from DB
+    const merged = livePrices.map((priceObj) => {
+      const match = dbStocks.find((s) => s.symbol === priceObj.symbol);
+      return {
+        ...priceObj,
+        quantity: match ? match.quantity : 0
+      };
+    });
+
+    res.json(merged);
   } catch (err) {
     console.error("Error fetching stocks:", err);
     res.status(500).json({ error: "Server error fetching stocks" });
